@@ -21,8 +21,7 @@ public class editDancerFrame extends JFrame implements ActionListener {
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	int width = (int) screenSize.getWidth();
 	int height = (int) screenSize.getHeight();
-//	int width = 800;
-//	int height = 450;
+
 
 	dancerLookup lookup = new dancerLookup();
 	dancerInfoPanel info = new dancerInfoPanel();

@@ -4,6 +4,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
@@ -11,11 +14,21 @@ public class rosterPanel extends JPanel{
 	GridLayout layout = new GridLayout(0,6);
 	int dancerCount = getDancerCount();
 	String[] names = new String[dancerCount];
+	JLabel[] nameLabels = new JLabel[dancerCount];
+	JCheckBox[] nameBoxes = new JCheckBox[dancerCount];
+	JButton submitButton = new JButton();
 	
 	public rosterPanel() {
+		System.out.println(dancerCount);
 		setLayout(layout);
 		getNames();
-//		for (int i = 0; i > )
+		for (int i = 0; i < dancerCount; i++){
+			String workingName = names[i];
+			JLabel workingLabel = new JLabel();
+			add(workingLabel);
+			workingLabel.setName(workingName);	
+		}
+		add(submitButton);
 	}
 
 	private void getNames() {
@@ -31,7 +44,6 @@ public class rosterPanel extends JPanel{
 			int i = 0;
 			while (rs.next()) {
 				names[i] = rs.getString("NAME");
-				System.out.println(names[i]);
 				i++;
 			}
 			
