@@ -7,8 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class mainFrame extends JFrame implements ActionListener
-{
+public class mainFrame extends JFrame implements ActionListener {
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	int width = (int) screenSize.getWidth();
 	int height = (int) screenSize.getHeight();
@@ -28,24 +27,25 @@ public class mainFrame extends JFrame implements ActionListener
 		add(calcDance);
 		newDancer.addActionListener(this);
 		editDancer.addActionListener(this);
+		calcDance.addActionListener(this);
 	}
 	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-		if(e.getSource() == newDancer) 
-		{
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == newDancer) {
 			this.setVisible(false);
 			newDancerFrame newDancer = new newDancerFrame("Add a New Dancer");
 			newDancer.setVisible(true);
 			newDancer.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		}
-		if(e.getSource() == editDancer)
-		{
-			this.setVisible(false);;
+		} else if(e.getSource() == editDancer) {
+			this.setVisible(false);
 			editDancerFrame editDancer = new editDancerFrame("Edit Dancer");
 			editDancer.setVisible(true);
 			editDancer.setDefaultCloseOperation(EXIT_ON_CLOSE);
-			
+		} else if(e.getSource() == calcDance) {
+			this.setVisible(false);
+			rosterFrame roster = new rosterFrame("Let's Dance");
+			roster.setVisible(true);;
+			roster.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		}
 		
 		

@@ -9,10 +9,13 @@ import javax.swing.JPanel;
 
 public class rosterPanel extends JPanel{
 	GridLayout layout = new GridLayout(0,6);
-	String[] names = new String[150];
+	int dancerCount = getDancerCount();
+	String[] names = new String[dancerCount];
 	
 	public rosterPanel() {
-		// TODO Auto-generated constructor stub
+		setLayout(layout);
+		getNames();
+//		for (int i = 0; i > )
 	}
 
 	private void getNames() {
@@ -41,4 +44,27 @@ public class rosterPanel extends JPanel{
 		}
 	}
 	
+	private int getDancerCount() {
+		int count = 0;
+		Connection c = null;
+		Statement stmt = null;
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:dancing.db");
+			c.setAutoCommit(false);
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM DANCERS;" );
+			while(rs.next()) {
+				count++;
+			}
+			System.out.println("The returned value is " + count);
+			rs.close();
+			stmt.close();
+			c.close();
+		} catch (Exception e) {
+			System.err.println(e.getClass().getName() + ":Test 5: " + e.getMessage() );
+			System.exit(0);
+		}
+		return count;
+	}
 }
