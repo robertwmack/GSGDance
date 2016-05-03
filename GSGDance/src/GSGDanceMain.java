@@ -1,4 +1,4 @@
-
+//main class
 public class GSGDanceMain {
 	static mainFrame home = new mainFrame();
 
