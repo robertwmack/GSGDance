@@ -19,6 +19,7 @@ public class rosterPanel extends JPanel{
 	JButton submitButton = new JButton();
 	
 	public rosterPanel() {
+		//still not getting these to display properly
 		System.out.println(dancerCount);
 		setLayout(layout);
 		getNames();

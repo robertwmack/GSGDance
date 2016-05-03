@@ -10,7 +10,7 @@ public class rosterFrame extends JFrame{
 	int height = (int) screenSize.getHeight();
 	rosterPanel roster = new rosterPanel();
 	
-	//constructor
+	//constructor that may need to be changed
 	public rosterFrame(String title) {
 		super(title);
 		setSize(width, height);
