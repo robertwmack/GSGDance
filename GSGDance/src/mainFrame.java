@@ -30,6 +30,7 @@ public class mainFrame extends JFrame implements ActionListener {
 		calcDance.addActionListener(this);
 	}
 	@Override
+	//calls frames
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == newDancer) {
 			this.setVisible(false);

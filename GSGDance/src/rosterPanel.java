@@ -44,6 +44,8 @@ public class rosterPanel extends JPanel{
 		}
 	}
 	
+	
+	//used to get the number of dancers
 	private int getDancerCount() {
 		int count = 0;
 		Connection c = null;
