@@ -16,18 +16,23 @@ public class rosterPanel extends JPanel{
 	String[] names = new String[dancerCount];
 	JLabel[] nameLabels = new JLabel[dancerCount];
 	JCheckBox[] nameBoxes = new JCheckBox[dancerCount];
-	JButton submitButton = new JButton();
+	JButton submitButton = new JButton("Funky Town");
+	JLabel[] nameHeader = new JLabel[2];
+	JLabel[] attendanceHeader = new JLabel[2];
+	JLabel[] statusHeader = new JLabel[2];
 	
 	public rosterPanel() {
 		//still not getting these to display properly
 		System.out.println(dancerCount);
 		setLayout(layout);
 		getNames();
-		for (int i = 0; i < dancerCount; i++){
-			String workingName = names[i];
-			JLabel workingLabel = new JLabel();
-			add(workingLabel);
-			workingLabel.setName(workingName);	
+		for (int i = 0; i < 2; i++) {
+			nameHeader[i] = new JLabel("Name");
+			add(nameHeader[i]);
+			attendanceHeader[i] = new JLabel("Present");
+			add(attendanceHeader[i]);
+			statusHeader[i] = new JLabel("Status");
+			add(statusHeader[i]);
 		}
 		add(submitButton);
 	}
