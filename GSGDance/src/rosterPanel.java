@@ -6,17 +6,19 @@ import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
 public class rosterPanel extends JPanel{
 	GridLayout layout = new GridLayout(0,6);
-	int dancerCount = getDancerCount();
+	int dancerCount = makeDancerCount();
+	String[] statusArray = {"AM/PM", "AM/-", "-/PM", "-/-"};
 	String[] names = new String[dancerCount];
 	JLabel[] nameLabels = new JLabel[dancerCount];
 	JCheckBox[] nameBoxes = new JCheckBox[dancerCount];
-	JButton submitButton = new JButton("Funky Town");
+	JComboBox[] nameStatus = new JComboBox[dancerCount];
 	JLabel[] nameHeader = new JLabel[2];
 	JLabel[] attendanceHeader = new JLabel[2];
 	JLabel[] statusHeader = new JLabel[2];
@@ -34,7 +36,14 @@ public class rosterPanel extends JPanel{
 			statusHeader[i] = new JLabel("Status");
 			add(statusHeader[i]);
 		}
-		add(submitButton);
+		for (int i = 0; i < dancerCount; i++) {
+			nameLabels[i] = new JLabel(names[i]);
+			nameBoxes[i] = new JCheckBox();
+			nameStatus[i] = new JComboBox(statusArray);
+			add(nameLabels[i]);
+			add(nameBoxes[i]);
+			add(nameStatus[i]);
+		}
 	}
 
 	private void getNames() {
@@ -64,7 +73,7 @@ public class rosterPanel extends JPanel{
 	
 	
 	//used to get the number of dancers
-	private int getDancerCount() {
+	private int makeDancerCount() {
 		int count = 0;
 		Connection c = null;
 		Statement stmt = null;
@@ -86,5 +95,9 @@ public class rosterPanel extends JPanel{
 			System.exit(0);
 		}
 		return count;
+	}
+	
+	public int getDancerCount() {
+		return dancerCount;
 	}
 }
