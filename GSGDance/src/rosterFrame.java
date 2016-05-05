@@ -6,35 +6,19 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
-public class rosterFrame extends JFrame implements ActionListener {
+public class rosterFrame extends JScrollPane{
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	int width = (int) screenSize.getWidth();
 	int height = (int) screenSize.getHeight();
 	rosterPanel roster = new rosterPanel();
-	JButton submitButton = new JButton("Calculate Dances");
 	
 	
 	//constructor that may need to be changed
 	public rosterFrame(String title) {
-		super(title);
 		setSize(width, height);
-		setLayout(new FlowLayout());
 		add(roster);
-		add(submitButton);
-		submitButton.addActionListener(this);
-	}
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		int count = roster.getDancerCount();
-		for (int i = 0; i < count; i++){
-			//if statment checking if present
-				//check dance ability
-					//tally per livery
-		}
 		
 	}
-
 }

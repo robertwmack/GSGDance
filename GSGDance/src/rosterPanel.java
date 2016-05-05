@@ -1,4 +1,6 @@
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,31 +13,33 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class rosterPanel extends JPanel{
-	GridLayout layout = new GridLayout(0,6);
+public class rosterPanel extends JPanel implements ActionListener{
+	GridLayout layout = new GridLayout(0,3);
 	int dancerCount = makeDancerCount();
 	String[] statusArray = {"AM/PM", "AM/-", "-/PM", "-/-"};
 	String[] names = new String[dancerCount];
+	String[] livery = new String[dancerCount];
 	JLabel[] nameLabels = new JLabel[dancerCount];
 	JCheckBox[] nameBoxes = new JCheckBox[dancerCount];
 	JComboBox[] nameStatus = new JComboBox[dancerCount];
-	JLabel[] nameHeader = new JLabel[2];
-	JLabel[] attendanceHeader = new JLabel[2];
-	JLabel[] statusHeader = new JLabel[2];
+	JLabel nameHeader = new JLabel();
+	JLabel attendanceHeader = new JLabel();
+	JLabel statusHeader = new JLabel();
+	JButton submitButton = new JButton("Calculate Dances");
+	JButton resetButton = new JButton("Reset Form");
+	JButton cancelButton = new JButton("Cancel");
 	
 	public rosterPanel() {
-		//still not getting these to display properly
-		System.out.println(dancerCount);
 		setLayout(layout);
 		getNames();
-		for (int i = 0; i < 2; i++) {
-			nameHeader[i] = new JLabel("Name");
-			add(nameHeader[i]);
-			attendanceHeader[i] = new JLabel("Present");
-			add(attendanceHeader[i]);
-			statusHeader[i] = new JLabel("Status");
-			add(statusHeader[i]);
-		}
+		add(submitButton);
+		submitButton.addActionListener(this);
+		nameHeader = new JLabel("Name");
+		add(nameHeader);
+		attendanceHeader = new JLabel("Present");
+		add(attendanceHeader);
+		statusHeader = new JLabel("Status");
+		add(statusHeader);
 		for (int i = 0; i < dancerCount; i++) {
 			nameLabels[i] = new JLabel(names[i]);
 			nameBoxes[i] = new JCheckBox();
@@ -43,6 +47,12 @@ public class rosterPanel extends JPanel{
 			add(nameLabels[i]);
 			add(nameBoxes[i]);
 			add(nameStatus[i]);
+			if(livery[i].equals("Royal Livery")){
+				nameStatus[i].setSelectedIndex(1);
+			} else if (livery[i].equals("Host Household")) {
+				nameStatus[i].setSelectedIndex(3);
+			}
+			System.out.println(nameLabels[i].getText() + " " + livery[i] + " " + nameStatus[i].getSelectedIndex());
 		}
 	}
 
@@ -55,10 +65,11 @@ public class rosterPanel extends JPanel{
 			c = DriverManager.getConnection("jdbc:sqlite:dancing.db");
 			c.setAutoCommit(false);
 			stmt = c.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT name FROM DANCERS;" );
+			ResultSet rs = stmt.executeQuery("SELECT NAME, LIVERY FROM DANCERS;" );
 			int i = 0;
 			while (rs.next()) {
 				names[i] = rs.getString("NAME");
+				livery[i] = rs.getString("LIVERY");
 				i++;
 			}
 			
@@ -86,7 +97,6 @@ public class rosterPanel extends JPanel{
 			while(rs.next()) {
 				count++;
 			}
-			System.out.println("The returned value is " + count);
 			rs.close();
 			stmt.close();
 			c.close();
@@ -99,5 +109,11 @@ public class rosterPanel extends JPanel{
 	
 	public int getDancerCount() {
 		return dancerCount;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

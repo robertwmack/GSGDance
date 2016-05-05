@@ -45,8 +45,7 @@ public class mainFrame extends JFrame implements ActionListener {
 		} else if(e.getSource() == calcDance) {
 			this.setVisible(false);
 			rosterFrame roster = new rosterFrame("Let's Dance");
-			roster.setVisible(true);;
-			roster.setDefaultCloseOperation(EXIT_ON_CLOSE);
+			roster.setVisible(true);
 		}
 		
 		
