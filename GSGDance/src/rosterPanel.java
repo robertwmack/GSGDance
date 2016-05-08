@@ -30,10 +30,15 @@ public class rosterPanel extends JPanel implements ActionListener{
 	JButton cancelButton = new JButton("Cancel");
 	
 	public rosterPanel() {
+//		System.out.println("Got here"); MADE IT
 		setLayout(layout);
 		getNames();
 		add(submitButton);
 		submitButton.addActionListener(this);
+		add(resetButton);
+		resetButton.addActionListener(this);
+		add(cancelButton);
+		cancelButton.addActionListener(this);
 		nameHeader = new JLabel("Name");
 		add(nameHeader);
 		attendanceHeader = new JLabel("Present");
@@ -113,7 +118,33 @@ public class rosterPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(e.getSource() == submitButton) {
+			updateAttendance();
+			//query db to build array for available dancers
+			//display dances to perform
+		}
 	}
+	
+	private void updateAttendance() {
+		Connection c = null;
+		Statement stmt = null;
+		for(int i = 0; i < dancerCount; i++)
+			if(nameBoxes[i].isSelected() == true) {
+				try {
+					Class.forName("org.sqlite.JDBC");
+					c = DriverManager.getConnection("jdbc:sqlite:dancing.db");
+					c.setAutoCommit(false);
+					stmt = c.createStatement();
+					ResultSet rs = stmt.executeQuery("UPDATE DANCERS SET HERE = 0 WHERE NAME = '" + names[i] + "';");
+					while(rs.next()) {
+					}
+					rs.close();
+					stmt.close();
+					c.close();
+				} catch (Exception e) {
+					System.err.println(e.getClass().getName() + ":Test 5: " + e.getMessage() );
+					System.exit(0);
+				}
+			}
+		}
 }
