@@ -20,6 +20,7 @@ public class LoadDatabase
 					 "(NAME			TEXT," +
 					 "SEX			TEXT," +
 					 "LIVERY		TEXT," +
+					 "HERE           INT," +
 					 "BELLA			TEXT," +
 					 "CASTELLANA	TEXT," +
 					 "CHIRANZULA	TEXT," +

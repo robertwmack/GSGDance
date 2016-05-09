@@ -6,6 +6,21 @@ import java.sql.Statement;
 //main class
 public class GSGDanceMain {
 	static mainFrame home = new mainFrame();
+	private static String[] dances = {
+			"Bella",
+			"Castellana",
+			"Chiranzula",
+			"Contrepasso",
+			"Gloria",
+			"Gracca",
+			"Leggiadria",
+			"Pavonne",
+			"So Bein Mi Chi",
+			"Spagnoletta",
+			"Spagnoletta Couples",
+			"Villanella",
+			"Villanella Couples"
+	};
 
 	public static void main(String[] args) {
 		LoadDatabase.loadDatabase();
@@ -16,6 +31,10 @@ public class GSGDanceMain {
 	
 	public Object getHome() {
 		return home;
+	}
+	
+	public static int getDanceCount() {
+		return dances.length;
 	}
 	
 	//use this to add columns in the database

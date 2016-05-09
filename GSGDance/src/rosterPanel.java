@@ -29,6 +29,19 @@ public class rosterPanel extends JPanel implements ActionListener{
 	JButton resetButton = new JButton("Reset Form");
 	JButton cancelButton = new JButton("Cancel");
 	
+	final int DANCE_COUNT = GSGDanceMain.getDanceCount();
+	
+	int[] amMenYes = new int[DANCE_COUNT];
+	int[] amMenMaybe = new int[DANCE_COUNT];
+	int[] amWomenYes = new int[DANCE_COUNT];
+	int[] amWomenMaybe = new int[DANCE_COUNT];
+	int[] pmMenYes = new int[DANCE_COUNT];
+	int[] pmMenMaybe = new int[DANCE_COUNT];
+	int[] pmWomenYes = new int[DANCE_COUNT];
+	int[] pmWomenMaybe = new int[DANCE_COUNT];
+	
+	
+	
 	public rosterPanel() {
 		setLayout(layout);
 		getNames();
@@ -118,7 +131,7 @@ public class rosterPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == submitButton) {
 			updateAttendance();
-			//query db to build array for available dancers
+			setDancers();
 			//display dances to perform
 		}
 	}
@@ -138,29 +151,39 @@ public class rosterPanel extends JPanel implements ActionListener{
 				presence = 0;
 			}
 			available = statusArray[nameStatus[i].getSelectedIndex()];
-				try {
-					Class.forName("org.sqlite.JDBC");
-					System.out.println("Stage 1");
-					c = DriverManager.getConnection("jdbc:sqlite:dancing.db");
-					System.out.println("Stage 1");
-					c.setAutoCommit(false);
-					System.out.println("Stage 1");
-					stmt = c.createStatement();
-					System.out.println("Stage 1");
-					String q = "UPDATE DANCERS SET HERE=" + presence + ", STATUS='" + available + "' WHERE NAME ='" + dancerName + "';";
-					System.out.println(q);
-					ResultSet rs = stmt.executeQuery(q);
-					while(rs.next()) {
-					}
-					rs.close();
-					stmt.close();
-					c.close();
-				} catch (Exception e) {
+			try {
+				Class.forName("org.sqlite.JDBC");
+				System.out.println("Stage 1");
+				c = DriverManager.getConnection("jdbc:sqlite:dancing.db");
+				System.out.println("Stage 1");
+				c.setAutoCommit(false);
+				System.out.println("Stage 1");
+				stmt = c.createStatement();
+				System.out.println("Stage 1");
+				String q = "UPDATE DANCERS SET HERE=" + presence + ", STATUS='" + available + "' WHERE NAME ='" + dancerName + "';";
+				System.out.println(q);
+				stmt.executeUpdate(q);
+				stmt.close();
+				c.close();
+			} catch (Exception e) {
 					System.err.println(e.getClass().getName() + ":Updating for attendance error: " + e.getMessage() );
 					System.exit(0);
-				}
 			}
 		}
+	}
 	
+	private void setDancers() {
+		amMenYes
+		/*
+		 * SELECT {BELLA, CASTELLANA, CHIRANZULA, CONTREPASSO, GLORIA, GRACCA, LEGGIADRIA, PAVONNE, SOBEIN, SPAGNOLETTA, SPAGNOLETTAC, VILLANELLA, VILLANELLAP WHERE HERE=1 AND SEX='MALE' AND (STATUS="AM_PM OR STATUS="AM");	
+		 */
+		amMenMaybe
+		amWomenYes
+		amWomenMaybe
+		pmMenYes
+		pmMenMaybe
+		pmWomenYes
+		pmWomenMaybe
+	}
 	
 }
