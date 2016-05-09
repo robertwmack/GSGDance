@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 public class rosterPanel extends JPanel implements ActionListener{
 	GridLayout layout = new GridLayout(0,3);
 	int dancerCount = makeDancerCount();
-	String[] statusArray = {"AM/PM", "AM/-", "-/PM", "-/-"};
+	String[] statusArray = {"AM_PM", "AM", "PM", ""};
 	String[] names = new String[dancerCount];
 	String[] livery = new String[dancerCount];
 	JLabel[] nameLabels = new JLabel[dancerCount];
@@ -30,7 +30,6 @@ public class rosterPanel extends JPanel implements ActionListener{
 	JButton cancelButton = new JButton("Cancel");
 	
 	public rosterPanel() {
-//		System.out.println("Got here"); MADE IT
 		setLayout(layout);
 		getNames();
 		add(submitButton);
@@ -57,7 +56,6 @@ public class rosterPanel extends JPanel implements ActionListener{
 			} else if (livery[i].equals("Host Household")) {
 				nameStatus[i].setSelectedIndex(3);
 			}
-			System.out.println(nameLabels[i].getText() + " " + livery[i] + " " + nameStatus[i].getSelectedIndex());
 		}
 	}
 
@@ -70,7 +68,7 @@ public class rosterPanel extends JPanel implements ActionListener{
 			c = DriverManager.getConnection("jdbc:sqlite:dancing.db");
 			c.setAutoCommit(false);
 			stmt = c.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT NAME, LIVERY FROM DANCERS;" );
+			ResultSet rs = stmt.executeQuery("SELECT NAME, LIVERY FROM DANCERS ORDER BY NAME;" );
 			int i = 0;
 			while (rs.next()) {
 				names[i] = rs.getString("NAME");
@@ -106,7 +104,7 @@ public class rosterPanel extends JPanel implements ActionListener{
 			stmt.close();
 			c.close();
 		} catch (Exception e) {
-			System.err.println(e.getClass().getName() + ":Test 5: " + e.getMessage() );
+			System.err.println(e.getClass().getName() + ":Counting Records Error: " + e.getMessage() );
 			System.exit(0);
 		}
 		return count;
@@ -128,23 +126,41 @@ public class rosterPanel extends JPanel implements ActionListener{
 	private void updateAttendance() {
 		Connection c = null;
 		Statement stmt = null;
-		for(int i = 0; i < dancerCount; i++)
-			if(nameBoxes[i].isSelected() == true) {
+		String dancerName;
+		int presence;
+		String available;
+		
+		for(int i = 0; i < dancerCount; i++) {
+			dancerName = nameLabels[i].getText();
+			if (nameBoxes[i].isSelected() == true) {
+				presence = 1;
+			} else {
+				presence = 0;
+			}
+			available = statusArray[nameStatus[i].getSelectedIndex()];
 				try {
 					Class.forName("org.sqlite.JDBC");
+					System.out.println("Stage 1");
 					c = DriverManager.getConnection("jdbc:sqlite:dancing.db");
+					System.out.println("Stage 1");
 					c.setAutoCommit(false);
+					System.out.println("Stage 1");
 					stmt = c.createStatement();
-					ResultSet rs = stmt.executeQuery("UPDATE DANCERS SET HERE = 0 WHERE NAME = '" + names[i] + "';");
+					System.out.println("Stage 1");
+					String q = "UPDATE DANCERS SET HERE=" + presence + ", STATUS='" + available + "' WHERE NAME ='" + dancerName + "';";
+					System.out.println(q);
+					ResultSet rs = stmt.executeQuery(q);
 					while(rs.next()) {
 					}
 					rs.close();
 					stmt.close();
 					c.close();
 				} catch (Exception e) {
-					System.err.println(e.getClass().getName() + ":Test 5: " + e.getMessage() );
+					System.err.println(e.getClass().getName() + ":Updating for attendance error: " + e.getMessage() );
 					System.exit(0);
 				}
 			}
 		}
+	
+	
 }

@@ -13,14 +13,14 @@ public class rosterFrame extends JFrame{
 	int width = (int) screenSize.getWidth();
 	int height = (int) screenSize.getHeight();
 	rosterPanel roster = new rosterPanel();
-	FlowLayout layout = new FlowLayout();
-	
 	
 	public rosterFrame(String title) {
 		setSize(width, height);
-		setLayout(layout);
-		add(roster);
-		System.out.println("Added roster panel");
+		JScrollPane scrollpane = new JScrollPane(roster);
+		scrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollpane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		getContentPane().add(scrollpane);
 		roster.setVisible(true);
 	}
+	
 }
