@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -173,17 +174,31 @@ public class rosterPanel extends JPanel implements ActionListener{
 	}
 	
 	private void setDancers() {
-		amMenYes
+		Connection c = null;
+		Statement stmt = null;
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:dancing.db");
+			c.setAutoCommit(false);
+			stmt = c.createStatement();
+			String q = "SELECT SUM(HERE) WHERE SEX='MALE' AND (STATUS='AM_PM' OR STATUS='AM') AND BELLA='Able To Perform';";
+			System.out.println(q);
+			ResultSet rs = stmt.executeQuery(q);
+			System.out.println(rs);
+			rs.close();
+			stmt.close();
+			c.commit();
+			c.close();
+		} catch ( Exception e) {
+			System.err.println( e.getClass().getName() + ": Error Finding Dancers to Dance: " + e.getMessage() );
+		}
+			
+			
+		
 		/*
 		 * SELECT {BELLA, CASTELLANA, CHIRANZULA, CONTREPASSO, GLORIA, GRACCA, LEGGIADRIA, PAVONNE, SOBEIN, SPAGNOLETTA, SPAGNOLETTAC, VILLANELLA, VILLANELLAP WHERE HERE=1 AND SEX='MALE' AND (STATUS="AM_PM OR STATUS="AM");	
 		 */
-		amMenMaybe
-		amWomenYes
-		amWomenMaybe
-		pmMenYes
-		pmMenMaybe
-		pmWomenYes
-		pmWomenMaybe
+	
 	}
 	
 }

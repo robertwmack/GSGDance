@@ -164,10 +164,10 @@ public class editDancerFrame extends JFrame implements ActionListener {
 			stmt.close();
 			c.commit();
 			c.close();
-			infoFrame.showMessageDialog(null, name + " Added", "Message Window", JOptionPane.INFORMATION_MESSAGE);
+			infoFrame.showMessageDialog(null, name + " Changed", "Message Window", JOptionPane.INFORMATION_MESSAGE);
 		} catch ( Exception e) {
 			System.err.println( e.getClass().getName() + ": 2-" + e.getMessage() );
-			infoFrame.showMessageDialog(null, "Error in adding " + name, "Message Window", JOptionPane.INFORMATION_MESSAGE);
+			infoFrame.showMessageDialog(null, "Error in changing " + name, "Message Window", JOptionPane.INFORMATION_MESSAGE);
 		}
 		cancelButtonPressed();
 	}
