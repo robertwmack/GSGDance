@@ -1,16 +1,17 @@
 import java.awt.GridLayout;
-import java.awt.LayoutManager;
-
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class dancerInfoPanel extends JPanel {
 	private JTextField name = new JTextField(15);
 	private String[] sexArray = {"Female", "Male"};
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private JComboBox sexChoice = new JComboBox(sexArray);
 	private String[] classArray = {"Noble", "Royal Livery", "Host Household"};
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private JComboBox classChoice = new JComboBox(classArray);
 	private JLabel nameLabel = new JLabel("Name");
 	private JLabel sexChoiceLabel = new JLabel("Sex");

@@ -2,6 +2,10 @@ import java.sql.*;
 
 public class LoadDatabase 
 {
+	
+	private static String[] dances = GSGDanceMain.getDanceNames(); //gets the names of the dances
+	private static int danceCount = dances.length;
+	
 	public static void loadDatabase()
 	{
 		Connection c = null;
@@ -17,29 +21,20 @@ public class LoadDatabase
 		try {
 		stmt = c.createStatement();
 		String sql = "CREATE TABLE DANCERS " +
-					 "(NAME			TEXT," +
-					 "SEX			TEXT," +
-					 "LIVERY		TEXT," +
-					 "HERE           INT," +
-					 "BELLA			TEXT," +
-					 "CASTELLANA	TEXT," +
-					 "CHIRANZULA	TEXT," +
-					 "CONTREPASSO	TEXT," +
-					 "GLORIA		TEXT," +
-					 "GRACCA		TEXT," +
-					 "LEGGIADRIA	TEXT," +
-					 "PAVONNE		TEXT," +
-					 "SOBEIN		TEXT," +
-					 "SPAGNOLETTA	TEXT," +
-					 "SPAGNOLETTAC	TEXT," +
-					 "VILLANELLA	TEXT," +
-					 "VILLANELLAP	TEXT," +
-					 "STATUS		TEXT)";
+					 "(NAME TEXT, " +
+					 "SEX TEXT, " +
+					 "LIVERY TEXT, " +
+					 "HERE TINYINT, " +
+					 "STATUS TINYINT";
+		for (int i = 0; i < danceCount; i++) {
+			sql = sql + ", " + dances[i] + " TINYINT";
+		}
+		sql = sql + ")";
+		
 		stmt.executeUpdate(sql);
 		stmt.close();
-		System.out.println("Table created successfully");
 		} catch ( Exception e ) {
-			System.out.println("Table already existed");
+			System.err.println( e.getClass().getName() + ": LoadDatabase-" + e.getMessage() );
 		}
 
 	}

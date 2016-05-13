@@ -1,7 +1,5 @@
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GraphicsConfiguration;
-import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,10 +8,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+@SuppressWarnings("serial")
 public class editDancerFrame extends JFrame implements ActionListener {
 	int NUMDANCES = 13;
 	dancerInfoPanel editInfo = new dancerInfoPanel();
@@ -68,8 +66,7 @@ public class editDancerFrame extends JFrame implements ActionListener {
 				sex = rs.getString("sex");
 				livery = rs.getString("livery");
 				for (int i = 0; i < NUMDANCES; i++) {
-					danceAbilities[i] = rs.getInt(i + 4);
-					System.out.println(danceAbilities[i]);
+					danceAbilities[i] = rs.getInt(i + 6);
 				}
 				for (int i = 0; i < danceAbilities.length; i++) {
 					switch(danceAbilities[i]) {
@@ -119,10 +116,10 @@ public class editDancerFrame extends JFrame implements ActionListener {
 					c.commit();
 					stmt.close();
 					c.close();
-					infoFrame.showMessageDialog(null, searchName + " deleted.", "Message Window", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, searchName + " deleted.", "Message Window", JOptionPane.INFORMATION_MESSAGE);
 				}  catch (Exception e) {
 					System.out.println(e.getClass().getName() + ": " + e.getMessage() );
-					infoFrame.showMessageDialog(null, name + " could not be deleted at this time.", "Message Window", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, name + " could not be deleted at this time.", "Message Window", JOptionPane.INFORMATION_MESSAGE);
 				}
 				lookup.name.removeAllItems();
 				lookup.getNames();
@@ -164,10 +161,10 @@ public class editDancerFrame extends JFrame implements ActionListener {
 			stmt.close();
 			c.commit();
 			c.close();
-			infoFrame.showMessageDialog(null, name + " Changed", "Message Window", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, name + " Changed", "Message Window", JOptionPane.INFORMATION_MESSAGE);
 		} catch ( Exception e) {
 			System.err.println( e.getClass().getName() + ": 2-" + e.getMessage() );
-			infoFrame.showMessageDialog(null, "Error in changing " + name, "Message Window", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Error in changing " + name, "Message Window", JOptionPane.INFORMATION_MESSAGE);
 		}
 		cancelButtonPressed();
 	}

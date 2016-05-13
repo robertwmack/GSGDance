@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class mainFrame extends JFrame implements ActionListener {
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	int width = (int) screenSize.getWidth();
@@ -14,6 +15,7 @@ public class mainFrame extends JFrame implements ActionListener {
 	JButton newDancer = new JButton("New Dancer");
 	JButton editDancer = new JButton("Edit Dancer");
 	JButton calcDance = new JButton("Let's Dance");
+	
 	public mainFrame()
 	{
 		super("Saint George Dance Mistress Brain");
@@ -51,8 +53,6 @@ public class mainFrame extends JFrame implements ActionListener {
 		
 		
 	}
-	
-
 	
 	public void returnHome() {
 		this.setVisible(true);

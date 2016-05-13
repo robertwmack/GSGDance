@@ -1,41 +1,23 @@
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class dancesPanel extends JPanel
 {
-
-	
-	private String[] dances = {
-			"Bella",
-			"Castellana",
-			"Chiranzula",
-			"Contrepasso",
-			"Gloria",
-			"Gracca",
-			"Leggiadria",
-			"Pavonne",
-			"So Bein Mi Chi",
-			"Spagnoletta",
-			"Spagnoletta Couples",
-			"Villanella",
-			"Villanella Couples"
-	};
+	private String[] dances = GSGDanceMain.getDanceNames(); //gets the names of the dances
+	private int danceCount = dances.length; 
 	private String[] abilities = {
 			"Can't Do",
 			"Don't Know",
 			"Needs Assistance",
 			"Able To Perform"
 	};
-	ButtonGroup[] danceGroups = new ButtonGroup[dances.length];
+	ButtonGroup[] danceGroups = new ButtonGroup[danceCount];
 	private int buttonCounter =0;
-	JRadioButton[] buttons = new JRadioButton[(dances.length) * (abilities.length)];
-	JLabel[] danceLabels = new JLabel[dances.length];
+	JRadioButton[] buttons = new JRadioButton[(danceCount) * (abilities.length)];
+	JLabel[] danceLabels = new JLabel[danceCount];
 	GridLayout layout = new GridLayout(0,6);
-	JCheckBox[] boxes = new JCheckBox[dances.length];
+	JCheckBox[] boxes = new JCheckBox[danceCount];
 	
 	
 	public dancesPanel()
@@ -55,6 +37,7 @@ public class dancesPanel extends JPanel
 				buttonCounter++;
 			}
 			boxes[i] = new JCheckBox("Teach Me");
+			boxes[i].setEnabled(false);
 			add(boxes[i]);		}
 	}
 	
