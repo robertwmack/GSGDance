@@ -1,10 +1,14 @@
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 @SuppressWarnings("serial")
@@ -13,33 +17,36 @@ public class rosterFrame extends JFrame implements ActionListener{
 	int width = (int) screenSize.getWidth();
 	int height = (int) screenSize.getHeight();
 	rosterPanel roster = new rosterPanel();
-	JButton submitButton = new JButton("Calculate Dances");
-	JButton resetButton = new JButton("Reset Form");
-	JButton cancelButton = new JButton("Cancel");
+	JScrollPane scrollpane = new JScrollPane();
+	static JFrame mainFrame = GSGDanceMain.home;
 	
 	public rosterFrame(String title) {
 		setSize(width, height);
+		roster = new rosterPanel();
 		JScrollPane scrollpane = new JScrollPane(roster);
+		setLayout(new BorderLayout());
+		add(scrollpane, BorderLayout.CENTER);
 		scrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollpane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		getContentPane().add(submitButton);
-		submitButton.addActionListener(this);
-		getContentPane().add(resetButton);
-		resetButton.addActionListener(this);
-		getContentPane().add(cancelButton);
-		cancelButton.addActionListener(this);
-		getContentPane().add(scrollpane);
-		roster.setVisible(true);
+		scrollpane.setVisible(true);
+		roster.submitButton.addActionListener(this);
+		roster.cancelButton.addActionListener(this);
+		roster.resetButton.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == submitButton) {
+		if(e.getSource() == roster.submitButton) {
 			rosterPanel.updateAttendance();
 			rosterPanel.setDancers();
-			reportPanel rPanel = new reportPanel();
-			rPanel.setVisible(true);
+			setVisible(false);
+			reportFrame report = new reportFrame("Report");
+			report.setVisible(true);
+		} else if(e.getSource() == roster.cancelButton) {
+			this.setVisible(false);
+			mainFrame.setVisible(true);
+		} else if(e.getSource() == roster.resetButton) {
+			roster.reset();
 		}
+		
 	}
-	
 }

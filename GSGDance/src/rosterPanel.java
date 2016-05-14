@@ -1,6 +1,4 @@
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,6 +7,7 @@ import java.sql.Statement;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -28,7 +27,9 @@ public class rosterPanel extends JPanel {
 	JLabel nameHeader = new JLabel();
 	JLabel attendanceHeader = new JLabel();
 	JLabel statusHeader = new JLabel();
-
+	JButton submitButton = new JButton("Calculate Dances");
+	JButton resetButton = new JButton("Reset Form");
+	JButton cancelButton = new JButton("Cancel");
 	private static String[] dances = GSGDanceMain.getDanceNames(); //gets the names of the dances
 	private static int danceCount = dances.length;
 	static int[] amDancesGood = new int[danceCount];
@@ -45,7 +46,9 @@ public class rosterPanel extends JPanel {
 	public rosterPanel() {
 		setLayout(layout);
 		getNames();
-		
+		add(submitButton);
+		add(resetButton);
+		add(cancelButton);
 		nameHeader = new JLabel("Name");
 		add(nameHeader);
 		attendanceHeader = new JLabel("Present");
@@ -249,4 +252,23 @@ public class rosterPanel extends JPanel {
 		return amDancesOk;
 	}
 	
+	public void reset() {
+		Connection c = null;
+		Statement stmt = null;
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:dancing.db");
+			c.setAutoCommit(false);
+			stmt = c.createStatement();
+			String sql = "UPDATE DANCERS SET HERE=0;";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			c.commit();
+			c.close();
+		} catch ( Exception e) {
+		}		
+		for(int i = 0; i < dancerCount; i++) {
+			nameBoxes[i].setSelected(false);
+		}
+	}
 }
