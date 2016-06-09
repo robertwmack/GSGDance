@@ -193,52 +193,73 @@ public class rosterPanel extends JPanel {
 		}
 		
 		//this will have to be changed for next version
-		
+		//Bella
 		amDancesGood[0] = (dancersAbleToDance[0][0][0][0] + dancersAbleToDance[1][0][0][0]) / 3;
 		amDancesOk[0] = (dancersAbleToDance[0][0][0][0] + dancersAbleToDance[1][0][0][0] + dancersAbleToDance[0][0][1][0] + dancersAbleToDance[1][0][1][0]) / 3;
 		
-		amDancesGood[1] = (dancersAbleToDance[0][0][0][1] + dancersAbleToDance[1][0][0][1]) / 2;
-		amDancesOk[1] = (dancersAbleToDance[0][0][0][1] + dancersAbleToDance[1][0][0][1] + dancersAbleToDance[0][0][1][1] + dancersAbleToDance[1][0][1][1]) / 2;
+		//Castellana
+		if (dancersAbleToDance[0][0][0][1] > dancersAbleToDance[1][0][0][1]) {
+			amDancesGood[1] = dancersAbleToDance[1][0][0][1];
+		} else {
+			amDancesGood[1] = dancersAbleToDance[0][0][0][1];
+		}
+		if ((dancersAbleToDance[0][0][0][1] +  dancersAbleToDance[0][0][1][1]) > (dancersAbleToDance[1][0][0][1]  + dancersAbleToDance[1][0][1][1])) {
+			amDancesOk[1] = dancersAbleToDance[1][0][0][1]  + dancersAbleToDance[1][0][1][1];
+		} else {
+			amDancesOk[1] = dancersAbleToDance[0][0][0][1] +  dancersAbleToDance[0][0][1][1];
+		}
 		
+		//Chiranzula
 		amDancesGood[2] = (dancersAbleToDance[0][0][0][2] + dancersAbleToDance[1][0][0][2]) / 2;
 		amDancesOk[2] = (dancersAbleToDance[0][0][0][2] + dancersAbleToDance[1][0][0][2] + dancersAbleToDance[0][0][1][2] + dancersAbleToDance[1][0][1][2]) / 2;
 		
+		//Contrepasso
 		amDancesGood[3] = (dancersAbleToDance[0][0][0][3] + dancersAbleToDance[1][0][0][3]) / 2;
 		amDancesOk[3] = (dancersAbleToDance[0][0][0][3] + dancersAbleToDance[1][0][0][3] + dancersAbleToDance[0][0][1][3] + dancersAbleToDance[1][0][1][3]) / 2;
 		
-		amDancesGood[4] = (dancersAbleToDance[0][0][0][4] + dancersAbleToDance[1][0][0][4]) / 3;
+		//Gloria
+		amDancesGood[4] = (dancersAbleToDance[0][0][0][4] + dancersAbleToDance[1][0][0][4]) / 2;
 		amDancesOk[4] = (dancersAbleToDance[0][0][0][4] + dancersAbleToDance[1][0][0][4] + dancersAbleToDance[0][0][1][4] + dancersAbleToDance[1][0][1][4]) / 2;
 		
-		amDancesGood[5] = 0; //(dancersAbleToDance[0][0][0][5] + dancersAbleToDance[1][0][0][5]) / 2;
-		amDancesOk[5] = 0; //(dancersAbleToDance[0][0][0][5] + dancersAbleToDance[1][0][0][5] + dancersAbleToDance[0][0][1][5] + dancersAbleToDance[1][0][1][5]) / 2;
+		//Gracca
+		amDancesGood[5] = (dancersAbleToDance[0][0][0][5] + dancersAbleToDance[1][0][0][5]) / 2;
+		amDancesOk[5] = (dancersAbleToDance[0][0][0][5] + dancersAbleToDance[1][0][0][5] + dancersAbleToDance[0][0][1][5] + dancersAbleToDance[1][0][1][5]) / 2;
 		
-		if(dancersAbleToDance[0][0][0][6] > dancersAbleToDance[1][0][0][6]) {
-			amDancesGood[6] = dancersAbleToDance[0][0][0][6]  / 2;
+		//Leggiadria
+		if(dancersAbleToDance[0][0][0][6] > (dancersAbleToDance[1][0][0][6] * 2)) {
+			amDancesGood[6] = dancersAbleToDance[1][0][0][6];
+		} else if ((dancersAbleToDance[0][0][0][6] * 2) < dancersAbleToDance[1][0][0][6]) {
+			amDancesGood[6] = dancersAbleToDance[0][0][0][6];
 		} else {
-			amDancesGood[6] = dancersAbleToDance[1][0][0][6]  / 2;
+			amDancesGood[6] = (dancersAbleToDance[0][0][0][6] + dancersAbleToDance[1][0][0][6]) / 3;
 		}
-		
 		if((dancersAbleToDance[0][0][0][6] + dancersAbleToDance[0][0][1][6]) > (dancersAbleToDance[1][0][0][6] + dancersAbleToDance[1][0][1][6])) {
 			amDancesOk[6] = (dancersAbleToDance[0][0][0][6] + dancersAbleToDance[0][0][1][6])  / 2;
 		} else {
 			amDancesOk[6] = (dancersAbleToDance[1][0][0][6] + dancersAbleToDance[1][0][1][6])  / 2;
 		}
 		
+		//Pavonne
 		amDancesGood[7] = (dancersAbleToDance[0][0][0][7] + dancersAbleToDance[1][0][0][7]) / 2;
 		amDancesOk[7] = (dancersAbleToDance[0][0][0][7] + dancersAbleToDance[1][0][0][7] + dancersAbleToDance[0][0][1][7] + dancersAbleToDance[1][0][1][7]) / 2;
 		
+		//So Bein Mi Chi
 		amDancesGood[8] = (dancersAbleToDance[0][0][0][8] + dancersAbleToDance[1][0][0][8]) / 2;
 		amDancesOk[8] = (dancersAbleToDance[0][0][0][8] + dancersAbleToDance[1][0][0][8] + dancersAbleToDance[0][0][1][8] + dancersAbleToDance[1][0][1][8]) / 2;
 		
+		//Spagnoletta
 		amDancesGood[9] = dancersAbleToDance[0][0][0][0] + dancersAbleToDance[1][0][0][0];
 		amDancesOk[9] = dancersAbleToDance[0][0][0][0] + dancersAbleToDance[1][0][0][0] + dancersAbleToDance[0][0][1][0] + dancersAbleToDance[1][0][1][0];
 		
+		//Spagnoletta Couples
 		amDancesGood[10] = (dancersAbleToDance[0][0][0][10] + dancersAbleToDance[1][0][0][10]) / 2;
 		amDancesOk[10] = (dancersAbleToDance[0][0][0][10] + dancersAbleToDance[1][0][0][10] + dancersAbleToDance[0][0][1][10] + dancersAbleToDance[1][0][1][10]) / 2;
 		
-		amDancesGood[11] = 0; //(dancersAbleToDance[0][0][0][0] + dancersAbleToDance[1][0][0][0]) / 3;
-		amDancesOk[11] = 0; //(dancersAbleToDance[0][0][0][0] + dancersAbleToDance[1][0][0][0] + dancersAbleToDance[0][0][1][0] + dancersAbleToDance[1][0][1][0]) / 3;
+		//Villanella
+		amDancesGood[11] = (dancersAbleToDance[0][0][0][0] + dancersAbleToDance[1][0][0][0]) / 2;
+		amDancesOk[11] = (dancersAbleToDance[0][0][0][0] + dancersAbleToDance[1][0][0][0] + dancersAbleToDance[0][0][1][0] + dancersAbleToDance[1][0][1][0]) / 2;
 		
+		//Villanella Couples
 		amDancesGood[12] = (dancersAbleToDance[0][0][0][12] + dancersAbleToDance[1][0][0][12]) / 2;
 		amDancesOk[12] = (dancersAbleToDance[0][0][0][12] + dancersAbleToDance[1][0][0][12] + dancersAbleToDance[0][0][1][12] + dancersAbleToDance[1][0][1][12]) / 2;
 			

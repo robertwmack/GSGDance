@@ -23,7 +23,7 @@ public class editDancerFrame extends JFrame implements ActionListener {
 
 	dancerLookup lookup = new dancerLookup();
 	dancerInfoPanel info = new dancerInfoPanel();
-	dancesPanel dances = new dancesPanel();
+	dancesPanel dancePanel = new dancesPanel();
 	String searchName = new String();
 	String name;
 	String sex;
@@ -33,9 +33,7 @@ public class editDancerFrame extends JFrame implements ActionListener {
 	JOptionPane infoFrame = new JOptionPane();
 	JButton editDancerButton = new JButton("Commit Changes");
 	JButton cancelEditButton = new JButton("Return to Menu");
-	private String[] danceNames = {
-			"BELLA", "CASTELLANA", "CHIRANZULA", "CONTREPASSO", "GLORIA", "GRACCA", "LEGGIADRIA", "PAVONNE", "SOBEIN", "SPAGNOLETTA", "SPAGNOLETTAC",
-			"VILLANELLA", "VILLANELLAP"};
+	private String[] dances = GSGDanceMain.getDanceNames();
 	
 	
 	public editDancerFrame(String title) {
@@ -71,21 +69,21 @@ public class editDancerFrame extends JFrame implements ActionListener {
 				for (int i = 0; i < danceAbilities.length; i++) {
 					switch(danceAbilities[i]) {
 					case 0:
-						dances.setDances((i * 4) + 0);
+						dancePanel.setDances((i * 4) + 0);
 						break;
 					case 1:
-						dances.setDances((i * 4) + 1);
+						dancePanel.setDances((i * 4) + 1);
 						break;
 					case 2:
-						dances.setDances((i * 4) + 2);
+						dancePanel.setDances((i * 4) + 2);
 						break;
 					case 3:
-						dances.setDances((i * 4) + 3);
+						dancePanel.setDances((i * 4) + 3);
 					}
 				}
 				lookup.setVisible(false);
 				add(info);
-				add(dances);
+				add(dancePanel);
 				info.setName(name);
 				info.setSexChoice(sex);
 				info.setClassChoice(livery);
@@ -140,8 +138,8 @@ public class editDancerFrame extends JFrame implements ActionListener {
 		String name = info.getName();
 		String sex = info.getSex();
 		String livery = info.getClassChoice();
-		int[] danceAbilities = new int[dances.danceGroups.length];
-		danceAbilities = dances.getDances();
+		int[] danceAbilities = new int[dances.length];
+		danceAbilities = dancePanel.getDances();
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:dancing.db");
@@ -153,7 +151,7 @@ public class editDancerFrame extends JFrame implements ActionListener {
 					"SEX = '" + sex + "', " +
 					"LIVERY = '" + livery + "' ";
 			for (int i = 0; i < danceAbilities.length; i++) {
-				sql = sql + ", " + danceNames[i] + " = " + danceAbilities[i];
+				sql = sql + ", " + dances[i] + " = " + danceAbilities[i];
 			}
 			sql = sql + " where NAME = '" + searchName + "';";
 			System.out.println(sql);

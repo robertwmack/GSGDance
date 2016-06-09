@@ -14,7 +14,7 @@ import javax.swing.JScrollPane;
 @SuppressWarnings("serial")
 public class rosterFrame extends JFrame implements ActionListener{
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	int width = (int) screenSize.getWidth();
+	int width = (int) screenSize.getWidth() / 2;
 	int height = (int) screenSize.getHeight();
 	rosterPanel roster = new rosterPanel();
 	JScrollPane scrollpane = new JScrollPane();
