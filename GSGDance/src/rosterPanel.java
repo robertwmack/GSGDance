@@ -34,7 +34,8 @@ public class rosterPanel extends JPanel {
 	private static int danceCount = dances.length;
 	static int[] amDancesGood = new int[danceCount];
 	static int[] amDancesOk = new int[danceCount];
-	
+	static int[] pmDancesGood = new int[danceCount];
+	static int[] pmDancesOk = new int[danceCount];
 	
 
 		
@@ -192,12 +193,17 @@ public class rosterPanel extends JPanel {
 			System.err.println( e.getClass().getName() + ": Error Finding Dancers to Dance: " + e.getMessage() );
 		}
 		
-		//this will have to be changed for next version
-		//Bella
+	// Bella
+		// AM is any group of 3
 		amDancesGood[0] = (dancersAbleToDance[0][0][0][0] + dancersAbleToDance[1][0][0][0]) / 3;
 		amDancesOk[0] = (dancersAbleToDance[0][0][0][0] + dancersAbleToDance[1][0][0][0] + dancersAbleToDance[0][0][1][0] + dancersAbleToDance[1][0][1][0]) / 3;
 		
-		//Castellana
+		// PM is any group of 3
+		pmDancesGood[0] = (dancersAbleToDance[0][1][0][0] + dancersAbleToDance[1][1][0][0]) / 3;
+		pmDancesOk[0] = (dancersAbleToDance[0][1][0][0] + dancersAbleToDance[1][1][0][0] + dancersAbleToDance[0][1][1][0] + dancersAbleToDance[1][1][1][0]) / 3;
+		
+	//Castellana
+		// AM is 1 male and 1 female
 		if (dancersAbleToDance[0][0][0][1] > dancersAbleToDance[1][0][0][1]) {
 			amDancesGood[1] = dancersAbleToDance[1][0][0][1];
 		} else {
@@ -209,23 +215,113 @@ public class rosterPanel extends JPanel {
 			amDancesOk[1] = dancersAbleToDance[0][0][0][1] +  dancersAbleToDance[0][0][1][1];
 		}
 		
-		//Chiranzula
+		// PM is 1 male and 1 female
+		if (dancersAbleToDance[0][1][0][1] > dancersAbleToDance[1][1][0][1]) {
+			pmDancesGood[1] = dancersAbleToDance[1][1][0][1];
+		} else {
+			pmDancesGood[1] = dancersAbleToDance[0][1][0][1];
+		}
+		if ((dancersAbleToDance[0][1][0][1] +  dancersAbleToDance[0][1][1][1]) > (dancersAbleToDance[1][1][0][1]  + dancersAbleToDance[1][1][1][1])) {
+			pmDancesOk[1] = dancersAbleToDance[1][1][0][1]  + dancersAbleToDance[1][1][1][1];
+		} else {
+			pmDancesOk[1] = dancersAbleToDance[0][1][0][1] +  dancersAbleToDance[0][1][1][1];
+		}
+		
+	//Chiranzula
+		// AM is any group of 2
 		amDancesGood[2] = (dancersAbleToDance[0][0][0][2] + dancersAbleToDance[1][0][0][2]) / 2;
 		amDancesOk[2] = (dancersAbleToDance[0][0][0][2] + dancersAbleToDance[1][0][0][2] + dancersAbleToDance[0][0][1][2] + dancersAbleToDance[1][0][1][2]) / 2;
 		
-		//Contrepasso
-		amDancesGood[3] = (dancersAbleToDance[0][0][0][3] + dancersAbleToDance[1][0][0][3]) / 2;
-		amDancesOk[3] = (dancersAbleToDance[0][0][0][3] + dancersAbleToDance[1][0][0][3] + dancersAbleToDance[0][0][1][3] + dancersAbleToDance[1][0][1][3]) / 2;
+		// PM is 1 male and 1 female
+		if (dancersAbleToDance[0][1][0][2] > dancersAbleToDance[1][1][0][2]) {
+			pmDancesGood[2] = dancersAbleToDance[1][1][0][2];
+		} else {
+			pmDancesGood[2] = dancersAbleToDance[0][1][0][2];
+		}
+		if ((dancersAbleToDance[0][1][0][2] +  dancersAbleToDance[0][1][1][2]) > (dancersAbleToDance[1][1][0][2]  + dancersAbleToDance[1][1][1][2])) {
+			pmDancesOk[2] = dancersAbleToDance[1][1][0][2]  + dancersAbleToDance[1][1][1][2];
+		} else {
+			pmDancesOk[2] = dancersAbleToDance[0][1][0][2] +  dancersAbleToDance[0][1][1][2];
+		}
 		
-		//Gloria
-		amDancesGood[4] = (dancersAbleToDance[0][0][0][4] + dancersAbleToDance[1][0][0][4]) / 2;
-		amDancesOk[4] = (dancersAbleToDance[0][0][0][4] + dancersAbleToDance[1][0][0][4] + dancersAbleToDance[0][0][1][4] + dancersAbleToDance[1][0][1][4]) / 2;
+	//Contrepasso
+		// AM is 1 male and 1 female
+		if (dancersAbleToDance[0][0][0][3] > dancersAbleToDance[1][0][0][3]) {
+			amDancesGood[3] = dancersAbleToDance[1][0][0][3];
+		} else {
+			amDancesGood[3] = dancersAbleToDance[0][0][0][3];
+		}
+		if ((dancersAbleToDance[0][0][0][3] +  dancersAbleToDance[0][0][1][3]) > (dancersAbleToDance[1][0][0][3]  + dancersAbleToDance[1][0][1][3])) {
+			amDancesOk[3] = dancersAbleToDance[1][0][0][3]  + dancersAbleToDance[1][0][1][3];
+		} else {
+			amDancesOk[3] = dancersAbleToDance[0][0][0][3] +  dancersAbleToDance[0][0][1][3];
+		}
+				
+		// PM is 1 male and 1 female
+		if (dancersAbleToDance[0][1][0][3] > dancersAbleToDance[1][1][0][3]) {
+			pmDancesGood[3] = dancersAbleToDance[1][1][0][3];
+		} else {
+			pmDancesGood[3] = dancersAbleToDance[0][1][0][3];
+		}
+		if ((dancersAbleToDance[0][1][0][3] +  dancersAbleToDance[0][1][1][3]) > (dancersAbleToDance[1][1][0][3]  + dancersAbleToDance[1][1][1][3])) {
+			pmDancesOk[3] = dancersAbleToDance[1][1][0][3]  + dancersAbleToDance[1][1][1][3];
+		} else {
+			pmDancesOk[3] = dancersAbleToDance[0][1][0][3] +  dancersAbleToDance[0][1][1][3];
+		}
 		
-		//Gracca
-		amDancesGood[5] = (dancersAbleToDance[0][0][0][5] + dancersAbleToDance[1][0][0][5]) / 2;
-		amDancesOk[5] = (dancersAbleToDance[0][0][0][5] + dancersAbleToDance[1][0][0][5] + dancersAbleToDance[0][0][1][5] + dancersAbleToDance[1][0][1][5]) / 2;
 		
-		//Leggiadria
+	//Gloria
+		// AM is 1 male and 1 female
+		if (dancersAbleToDance[0][0][0][4] > dancersAbleToDance[1][0][0][4]) {
+			amDancesGood[4] = dancersAbleToDance[1][0][0][4];
+		} else {
+			amDancesGood[4] = dancersAbleToDance[0][0][0][4];
+		}
+		if ((dancersAbleToDance[0][0][0][4] +  dancersAbleToDance[0][0][1][4]) > (dancersAbleToDance[1][0][0][4]  + dancersAbleToDance[1][0][1][4])) {
+			amDancesOk[4] = dancersAbleToDance[1][0][0][4]  + dancersAbleToDance[1][0][1][4];
+		} else {
+			amDancesOk[4] = dancersAbleToDance[0][0][0][4] +  dancersAbleToDance[0][0][1][4];
+		}
+				
+		// PM is 1 male and 1 female
+		if (dancersAbleToDance[0][1][0][4] > dancersAbleToDance[1][1][0][4]) {
+			pmDancesGood[4] = dancersAbleToDance[1][1][0][4];
+		} else {
+			pmDancesGood[4] = dancersAbleToDance[0][1][0][4];
+		}
+		if ((dancersAbleToDance[0][1][0][4] +  dancersAbleToDance[0][1][1][4]) > (dancersAbleToDance[1][1][0][4]  + dancersAbleToDance[1][1][1][4])) {
+			pmDancesOk[4] = dancersAbleToDance[1][1][0][4]  + dancersAbleToDance[1][1][1][4];
+		} else {
+			pmDancesOk[4] = dancersAbleToDance[0][1][0][4] +  dancersAbleToDance[0][1][1][4];
+		}
+		
+	//Gracca
+		// AM is 1 male and 1 female
+		if (dancersAbleToDance[0][0][0][5] > dancersAbleToDance[1][0][0][5]) {
+			amDancesGood[5] = dancersAbleToDance[1][0][0][5];
+		} else {
+			amDancesGood[5] = dancersAbleToDance[0][0][0][5];
+		}
+		if ((dancersAbleToDance[0][0][0][5] +  dancersAbleToDance[0][0][1][5]) > (dancersAbleToDance[1][0][0][5]  + dancersAbleToDance[1][0][1][5])) {
+			amDancesOk[5] = dancersAbleToDance[1][0][0][5]  + dancersAbleToDance[1][0][1][5];
+		} else {
+			amDancesOk[5] = dancersAbleToDance[0][0][0][5] +  dancersAbleToDance[0][0][1][5];
+		}
+				
+		// PM is 1 male and 1 female
+		if (dancersAbleToDance[0][1][0][5] > dancersAbleToDance[1][1][0][5]) {
+			pmDancesGood[5] = dancersAbleToDance[1][1][0][5];
+		} else {
+			pmDancesGood[5] = dancersAbleToDance[0][1][0][5];
+		}
+		if ((dancersAbleToDance[0][1][0][5] +  dancersAbleToDance[0][1][1][5]) > (dancersAbleToDance[1][1][0][5]  + dancersAbleToDance[1][1][1][5])) {
+			pmDancesOk[5] = dancersAbleToDance[1][1][0][5]  + dancersAbleToDance[1][1][1][5];
+		} else {
+			pmDancesOk[5] = dancersAbleToDance[0][1][0][5] +  dancersAbleToDance[0][1][1][5];
+		}
+		
+	//Leggiadria
+		// AM is 1 male and 2 females or 1 female and 2 males
 		if(dancersAbleToDance[0][0][0][6] > (dancersAbleToDance[1][0][0][6] * 2)) {
 			amDancesGood[6] = dancersAbleToDance[1][0][0][6];
 		} else if ((dancersAbleToDance[0][0][0][6] * 2) < dancersAbleToDance[1][0][0][6]) {
@@ -239,30 +335,153 @@ public class rosterPanel extends JPanel {
 			amDancesOk[6] = (dancersAbleToDance[1][0][0][6] + dancersAbleToDance[1][0][1][6])  / 2;
 		}
 		
-		//Pavonne
-		amDancesGood[7] = (dancersAbleToDance[0][0][0][7] + dancersAbleToDance[1][0][0][7]) / 2;
-		amDancesOk[7] = (dancersAbleToDance[0][0][0][7] + dancersAbleToDance[1][0][0][7] + dancersAbleToDance[0][0][1][7] + dancersAbleToDance[1][0][1][7]) / 2;
 		
-		//So Bein Mi Chi
-		amDancesGood[8] = (dancersAbleToDance[0][0][0][8] + dancersAbleToDance[1][0][0][8]) / 2;
-		amDancesOk[8] = (dancersAbleToDance[0][0][0][8] + dancersAbleToDance[1][0][0][8] + dancersAbleToDance[0][0][1][8] + dancersAbleToDance[1][0][1][8]) / 2;
+		// PM is 1 male and 2 females or 1 female and 2 males but accounts for the loss of 2 men to dance with the Queen
+		if((dancersAbleToDance[0][1][0][6] - 2) > (dancersAbleToDance[1][1][0][6] * 2)) {
+			pmDancesGood[6] = dancersAbleToDance[1][1][0][6];
+		} else if (((dancersAbleToDance[0][1][0][6] - 2) * 2) < dancersAbleToDance[1][1][0][6]) {
+			pmDancesGood[6] = (dancersAbleToDance[0][1][0][6] - 2);
+		} else {
+			pmDancesGood[6] = ((dancersAbleToDance[0][1][0][6] - 2) + dancersAbleToDance[1][1][0][6]) / 3;
+		}
+		if((dancersAbleToDance[0][1][0][6] + dancersAbleToDance[0][1][1][6] - 2) > (dancersAbleToDance[1][1][0][6] + dancersAbleToDance[1][1][1][6])) {
+			pmDancesOk[6] = (dancersAbleToDance[0][1][0][6] + dancersAbleToDance[0][1][1][6] - 2)  / 2;
+		} else {
+			pmDancesOk[6] = (dancersAbleToDance[1][1][0][6] + dancersAbleToDance[1][1][1][6])  / 2;
+		}
 		
-		//Spagnoletta
-		amDancesGood[9] = dancersAbleToDance[0][0][0][0] + dancersAbleToDance[1][0][0][0];
-		amDancesOk[9] = dancersAbleToDance[0][0][0][0] + dancersAbleToDance[1][0][0][0] + dancersAbleToDance[0][0][1][0] + dancersAbleToDance[1][0][1][0];
 		
-		//Spagnoletta Couples
-		amDancesGood[10] = (dancersAbleToDance[0][0][0][10] + dancersAbleToDance[1][0][0][10]) / 2;
-		amDancesOk[10] = (dancersAbleToDance[0][0][0][10] + dancersAbleToDance[1][0][0][10] + dancersAbleToDance[0][0][1][10] + dancersAbleToDance[1][0][1][10]) / 2;
+	//Pavonne
+		// AM is 1 male and 1 female
+		if ((dancersAbleToDance[0][0][0][7] - 1) > dancersAbleToDance[1][0][0][7]) {
+			amDancesGood[7] = dancersAbleToDance[1][0][0][7];
+		} else {
+			amDancesGood[7] = dancersAbleToDance[0][0][0][7] - 1;
+		}
+		if ((dancersAbleToDance[0][0][0][7] +  dancersAbleToDance[0][0][1][7] - 1) > (dancersAbleToDance[1][0][0][7]  + dancersAbleToDance[1][0][1][7])) {
+			amDancesOk[7] = dancersAbleToDance[1][0][0][7]  + dancersAbleToDance[1][0][1][7];
+		} else {
+			amDancesOk[7] = dancersAbleToDance[0][0][0][7] +  dancersAbleToDance[0][0][1][7] - 1;
+		}
+				
+		// PM is 1 male and 1 female less 1 male to dance with the Queen
+		if ((dancersAbleToDance[0][1][0][7] - 1) > dancersAbleToDance[1][1][0][7]) {
+			pmDancesGood[7] = dancersAbleToDance[1][1][0][7];
+		} else {
+			pmDancesGood[7] = dancersAbleToDance[0][1][0][7] - 1;
+		}
+		if ((dancersAbleToDance[0][1][0][7] +  dancersAbleToDance[0][1][1][7] - 1) > (dancersAbleToDance[1][1][0][7]  + dancersAbleToDance[1][1][1][7])) {
+			pmDancesOk[7] = dancersAbleToDance[1][1][0][7]  + dancersAbleToDance[1][1][1][7];
+		} else {
+			pmDancesOk[7] = dancersAbleToDance[0][1][0][7] +  dancersAbleToDance[0][1][1][7] - 1;
+		}
 		
-		//Villanella
-		amDancesGood[11] = (dancersAbleToDance[0][0][0][0] + dancersAbleToDance[1][0][0][0]) / 2;
-		amDancesOk[11] = (dancersAbleToDance[0][0][0][0] + dancersAbleToDance[1][0][0][0] + dancersAbleToDance[0][0][1][0] + dancersAbleToDance[1][0][1][0]) / 2;
+	//So Bein Mi Chi
+		// AM is 1 male and 1 female
+		if (dancersAbleToDance[0][0][0][8] > dancersAbleToDance[1][0][0][8]) {
+			amDancesGood[8] = dancersAbleToDance[1][0][0][8];
+		} else {
+			amDancesGood[8] = dancersAbleToDance[0][0][0][8];
+		}
+		if ((dancersAbleToDance[0][0][0][8] +  dancersAbleToDance[0][0][1][8]) > (dancersAbleToDance[1][0][0][8]  + dancersAbleToDance[1][0][1][8])) {
+			amDancesOk[8] = dancersAbleToDance[1][0][0][8]  + dancersAbleToDance[1][0][1][8];
+		} else {
+			amDancesOk[8] = dancersAbleToDance[0][0][0][8] +  dancersAbleToDance[0][0][1][8];
+		}
+				
+		// PM is 1 male and 1 female
+		if (dancersAbleToDance[0][1][0][8] > dancersAbleToDance[1][1][0][8]) {
+			pmDancesGood[8] = dancersAbleToDance[1][1][0][8];
+		} else {
+			pmDancesGood[8] = dancersAbleToDance[0][1][0][8];
+		}
+		if ((dancersAbleToDance[0][1][0][8] +  dancersAbleToDance[0][1][1][8]) > (dancersAbleToDance[1][1][0][8]  + dancersAbleToDance[1][1][1][8])) {
+			pmDancesOk[8] = dancersAbleToDance[1][1][0][8]  + dancersAbleToDance[1][1][1][8];
+		} else {
+			pmDancesOk[8] = dancersAbleToDance[0][1][0][8] +  dancersAbleToDance[0][1][1][8];
+		}
 		
-		//Villanella Couples
-		amDancesGood[12] = (dancersAbleToDance[0][0][0][12] + dancersAbleToDance[1][0][0][12]) / 2;
-		amDancesOk[12] = (dancersAbleToDance[0][0][0][12] + dancersAbleToDance[1][0][0][12] + dancersAbleToDance[0][0][1][12] + dancersAbleToDance[1][0][1][12]) / 2;
-			
+	//Spagnoletta
+		// AM and PM are just the number available to dance	
+		amDancesGood[9] = dancersAbleToDance[0][0][0][9] + dancersAbleToDance[1][0][0][9];
+		amDancesOk[9] = dancersAbleToDance[0][0][0][9] + dancersAbleToDance[1][0][0][9] + dancersAbleToDance[0][0][1][9] + dancersAbleToDance[1][0][1][9];
+		pmDancesGood[9] = dancersAbleToDance[0][1][0][9] + dancersAbleToDance[1][1][0][9];
+		pmDancesOk[9] = dancersAbleToDance[0][1][0][9] + dancersAbleToDance[1][1][0][9] + dancersAbleToDance[0][1][1][9] + dancersAbleToDance[1][1][1][9];
+		
+	//Spagnoletta Couples
+		// AM is 1 male and 1 female
+		if (dancersAbleToDance[0][0][0][10] > dancersAbleToDance[1][0][0][10]) {
+			amDancesGood[10] = dancersAbleToDance[1][0][0][10];
+		} else {
+			amDancesGood[10] = dancersAbleToDance[0][0][0][10];
+		}
+		if ((dancersAbleToDance[0][0][0][10] +  dancersAbleToDance[0][0][1][10]) > (dancersAbleToDance[1][0][0][10]  + dancersAbleToDance[1][0][1][10])) {
+			amDancesOk[10] = dancersAbleToDance[1][0][0][10]  + dancersAbleToDance[1][0][1][10];
+		} else {
+			amDancesOk[10] = dancersAbleToDance[0][0][0][10] +  dancersAbleToDance[0][0][1][10];
+		}
+				
+		// PM is 1 male and 1 female
+		if (dancersAbleToDance[0][1][0][10] > dancersAbleToDance[1][1][0][10]) {
+			pmDancesGood[10] = dancersAbleToDance[1][1][0][10];
+		} else {
+			pmDancesGood[10] = dancersAbleToDance[0][1][0][10];
+		}
+		if ((dancersAbleToDance[0][1][0][10] +  dancersAbleToDance[0][1][1][10]) > (dancersAbleToDance[1][1][0][10]  + dancersAbleToDance[1][1][1][10])) {
+			pmDancesOk[10] = dancersAbleToDance[1][1][0][10]  + dancersAbleToDance[1][1][1][10];
+		} else {
+			pmDancesOk[10] = dancersAbleToDance[0][1][0][10] +  dancersAbleToDance[0][1][1][10];
+		}
+		
+	//Villanella
+			// AM is 1 male and 1 female
+		if (dancersAbleToDance[0][0][0][11] > dancersAbleToDance[1][0][0][11]) {
+			amDancesGood[11] = dancersAbleToDance[1][0][0][11];
+		} else {
+			amDancesGood[11] = dancersAbleToDance[0][0][0][11];
+		}
+		if ((dancersAbleToDance[0][0][0][11] +  dancersAbleToDance[0][0][1][11]) > (dancersAbleToDance[1][0][0][11]  + dancersAbleToDance[1][0][1][11])) {
+			amDancesOk[11] = dancersAbleToDance[1][0][0][11]  + dancersAbleToDance[1][0][1][11];
+		} else {
+			amDancesOk[11] = dancersAbleToDance[0][0][0][11] +  dancersAbleToDance[0][0][1][11];
+		}
+				
+		// PM is 1 male and 1 female less 1 male to dance with the Queen
+		if ((dancersAbleToDance[0][1][0][11] - 1) > dancersAbleToDance[1][1][0][11]) {
+			pmDancesGood[11] = dancersAbleToDance[1][1][0][11];
+		} else {
+			pmDancesGood[11] = dancersAbleToDance[0][1][0][11] - 1;
+		}
+		if ((dancersAbleToDance[0][1][0][11] +  dancersAbleToDance[0][1][1][11] - 1) > (dancersAbleToDance[1][1][0][11]  + dancersAbleToDance[1][1][1][11])) {
+			pmDancesOk[11] = dancersAbleToDance[1][1][0][11]  + dancersAbleToDance[1][1][1][11];
+		} else {
+			pmDancesOk[11] = dancersAbleToDance[0][1][0][11] +  dancersAbleToDance[0][1][1][11] - 1;
+		}
+		
+	//Villanella Couples
+		// AM is 1 male and 1 female
+		if (dancersAbleToDance[0][0][0][12] > dancersAbleToDance[1][0][0][12]) {
+			amDancesGood[12] = dancersAbleToDance[1][0][0][12];
+		} else {
+			amDancesGood[12] = dancersAbleToDance[0][0][0][12];
+		}
+		if ((dancersAbleToDance[0][0][0][12] +  dancersAbleToDance[0][0][1][12]) > (dancersAbleToDance[1][0][0][12]  + dancersAbleToDance[1][0][1][12])) {
+			amDancesOk[12] = dancersAbleToDance[1][0][0][12]  + dancersAbleToDance[1][0][1][12];
+		} else {
+			amDancesOk[12] = dancersAbleToDance[0][0][0][12] +  dancersAbleToDance[0][0][1][12];
+		}
+				
+		// PM is 1 male and 1 female
+		if (dancersAbleToDance[0][1][0][12] > dancersAbleToDance[1][1][0][12]) {
+			pmDancesGood[12] = dancersAbleToDance[1][1][0][12];
+		} else {
+			pmDancesGood[12] = dancersAbleToDance[0][1][0][12];
+		}
+		if ((dancersAbleToDance[0][1][0][12] +  dancersAbleToDance[0][1][1][12]) > (dancersAbleToDance[1][1][0][12]  + dancersAbleToDance[1][1][1][12])) {
+			pmDancesOk[12] = dancersAbleToDance[1][1][0][12]  + dancersAbleToDance[1][1][1][12];
+		} else {
+			pmDancesOk[12] = dancersAbleToDance[0][1][0][12] +  dancersAbleToDance[0][1][1][12];
+		}
 	}
 
 	public static int[] getAmDancesGood() {
@@ -271,6 +490,14 @@ public class rosterPanel extends JPanel {
 
 	public static int[] getAmDancesOk() {
 		return amDancesOk;
+	}
+	
+	public static int[] getPmDancesGood() {
+		return pmDancesGood;
+	}
+	
+	public static int[] getPmDancesOk() {
+		return pmDancesOk;
 	}
 	
 	public void reset() {

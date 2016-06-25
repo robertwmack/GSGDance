@@ -11,6 +11,8 @@ public class reportPanel extends JPanel {
 	private static int danceCount = dances.length;
 	private static int[] amDancesGood = rosterPanel.getAmDancesGood();
 	private static int[] amDancesOk = rosterPanel.getAmDancesOk();
+	private static int[] pmDancesGood = rosterPanel.getPmDancesGood();
+	private static int[] pmDancesOk = rosterPanel.getPmDancesOk();
 	public reportPanel() {
 		setLayout(new GridLayout(14,3));
 		reportLabels[0] = new JLabel("Dances");
@@ -24,8 +26,7 @@ public class reportPanel extends JPanel {
 			add(reportLabels[(3 * i)]);
 			reportLabels[(3 * i) + 1] = new JLabel(amDancesGood[i - 1] + " - " + amDancesOk[i - 1]);
 			add(reportLabels[(3 * i) + 1]);
-			//set to 0s for Janesville
-			reportLabels[(3 * i) + 2] = new JLabel("not ready");
+			reportLabels[(3 * i) + 2] = new JLabel(pmDancesGood[i - 1] + " - " + pmDancesOk[i - 1]);
 			add(reportLabels[(3 * i) + 2]);
 		}
 	}
